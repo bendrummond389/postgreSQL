@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "Image" BYTEA NOT NULL DEFAULT '';

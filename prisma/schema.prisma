@@ -15,8 +15,8 @@ datasource db {
 model User {
   id     String   @id @default(cuid())
   colors String[]
-  url    String   @default("")
+  image  String   @default("")
 }
 
-// image
+
 

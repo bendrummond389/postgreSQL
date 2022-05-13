@@ -13,15 +13,6 @@ const prisma = new PrismaClient();
 
 // Create a user
 
-app.put("/", async (req: Request, res: Response) => {
-  const {id, username} = req.body;
-const updatedUser = await prisma.user.update({
-  where: {
-    id = id
-  }
-})
-});
-
 app.post("/", async (req: Request, res: Response) => {
   const { id, colors, url } = req.body;
 
@@ -35,6 +26,25 @@ app.post("/", async (req: Request, res: Response) => {
   res.json(user);
 });
 
+// update user
+
+app.put("/", async (req: Request, res: Response) => {
+  const { id, colors, url } = req.body;
+  const updatedUser = await prisma.user.update({
+    where: {
+      id: id,
+    },
+    data: {
+      colors: colors,
+      url: url
+    },
+  });
+
+  res.json(updatedUser)
+});
+
+// retreive user
+
 app.get("/byId/:id", async (req: Request, res: Response) => {
   const id = req.params.id;
   const user = await prisma.user.findUnique({
@@ -44,6 +54,8 @@ app.get("/byId/:id", async (req: Request, res: Response) => {
   });
   res.json(user);
 });
+
+// delete user
 
 app.delete("/:id", async (req: Request, res: Response) => {
   const id = req.params.id;
